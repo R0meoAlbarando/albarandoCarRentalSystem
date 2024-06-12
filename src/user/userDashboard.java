@@ -5,14 +5,18 @@
  */
 package user;
 
+import config.dbConnector;
 import config.session;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import login.loginForm;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -20,6 +24,7 @@ import login.loginForm;
  */
 public class userDashboard extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form adminDash
      */
@@ -27,6 +32,8 @@ public class userDashboard extends javax.swing.JFrame {
         initComponents();
         dt();
         times();
+        displayData();
+        
     }
     
     public void dt(){
@@ -53,6 +60,18 @@ public class userDashboard extends javax.swing.JFrame {
         });
         t.start();
     }
+    
+    public void displayData(){
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT * FROM tbl_carrent");
+            RentedTable.setModel(DbUtils.resultSetToTableModel(rs));
+             rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        
+        }
+    }
 
 
     /**
@@ -73,11 +92,12 @@ public class userDashboard extends javax.swing.JFrame {
         date = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        RentedTable = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        User = new javax.swing.JButton();
         RentCar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -97,70 +117,72 @@ public class userDashboard extends javax.swing.JFrame {
         jPanel2.setLayout(null);
 
         acc_user.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
+        acc_user.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_user.setText("  ");
         acc_user.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(acc_user);
-        acc_user.setBounds(20, 90, 350, 40);
+        acc_user.setBounds(20, 90, 710, 40);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("USER DASHBOARD");
-        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(200, 20, 170, 30);
+        jLabel1.setBounds(20, 0, 810, 60);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Time :");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(390, 110, 50, 20);
+        jLabel3.setBounds(730, 110, 50, 20);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Date :");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(390, 90, 50, 20);
+        jLabel4.setBounds(730, 90, 50, 20);
 
         date.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         date.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(date);
-        date.setBounds(440, 90, 110, 20);
+        date.setBounds(780, 90, 110, 20);
 
         time.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         time.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(time);
-        time.setBounds(440, 110, 110, 20);
+        time.setBounds(780, 110, 110, 20);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(160, 10, 570, 140);
+        jPanel2.setBounds(160, 10, 910, 140);
 
         jPanel3.setBackground(new java.awt.Color(255, 0, 0));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.setLayout(null);
+
+        RentedTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RentedTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(RentedTable);
+
+        jPanel3.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 90, 870, 240);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText(" Car Rented Table :");
+        jPanel3.add(jLabel6);
+        jLabel6.setBounds(20, 50, 190, 40);
+
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(160, 160, 570, 390);
+        jPanel3.setBounds(160, 160, 910, 380);
 
         jPanel5.setBackground(new java.awt.Color(255, 0, 0));
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel5.setLayout(null);
 
-        jButton4.setText("Cars");
-        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton4);
-        jButton4.setBounds(0, 310, 140, 30);
-
-        jButton1.setText("View Rent");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel5.add(jButton1);
-        jButton1.setBounds(0, 160, 140, 30);
-
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton5.setText("Log Out");
         jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -169,18 +191,20 @@ public class userDashboard extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jButton5);
-        jButton5.setBounds(0, 490, 140, 30);
+        jButton5.setBounds(0, 460, 140, 40);
 
-        jButton6.setText("User Details");
-        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        User.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        User.setText("User Details");
+        User.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        User.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                UserActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton6);
-        jButton6.setBounds(0, 260, 140, 30);
+        jPanel5.add(User);
+        User.setBounds(0, 270, 140, 40);
 
+        RentCar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         RentCar.setText("Rent Car");
         RentCar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         RentCar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,24 +213,24 @@ public class userDashboard extends javax.swing.JFrame {
             }
         });
         jPanel5.add(RentCar);
-        RentCar.setBounds(0, 210, 140, 30);
+        RentCar.setBounds(0, 210, 140, 40);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user emote.png"))); // NOI18N
         jPanel5.add(jLabel2);
         jLabel2.setBounds(20, 20, 100, 110);
 
         jPanel1.add(jPanel5);
-        jPanel5.setBounds(10, 10, 140, 540);
+        jPanel5.setBounds(10, 10, 140, 530);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
         );
 
         pack();
@@ -219,13 +243,6 @@ public class userDashboard extends javax.swing.JFrame {
         log.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        userCarForm ucf = new userCarForm();
-        ucf.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
@@ -240,12 +257,12 @@ public class userDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
         // TODO add your handling code here:
         userDetails uds = new userDetails();
         uds.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_UserActionPerformed
 
     private void RentCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarActionPerformed
         // TODO add your handling code here:
@@ -253,6 +270,10 @@ public class userDashboard extends javax.swing.JFrame {
         urc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RentCarActionPerformed
+
+    private void RentedTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RentedTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RentedTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -294,20 +315,21 @@ public class userDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton RentCar;
+    private javax.swing.JTable RentedTable;
+    private javax.swing.JButton User;
     public javax.swing.JLabel acc_user;
     private javax.swing.JLabel date;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }

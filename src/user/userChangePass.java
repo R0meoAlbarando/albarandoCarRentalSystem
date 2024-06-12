@@ -283,17 +283,17 @@ public class userChangePass extends javax.swing.JFrame {
                     if (newPassValue.equals(confirmPassValue)) {
                         String npass = passwordHasher.hashPassword(newPassValue);
                         dbc.updateData("UPDATE tbl_user SET u_password = '" + npass + "'");
-                        JOptionPane.showMessageDialog(null, "Password Successfully Updated!");
+                        JOptionPane.showMessageDialog(null, "Password Successfully Updated!", "Success", JOptionPane.INFORMATION_MESSAGE);
                         userDetails uds = new userDetails();
                         uds.setVisible(true);
                         this.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "New Password and Confirm Password do not match!");
+                        JOptionPane.showMessageDialog(null, "New Password and Confirm Password do not match!", "Error", JOptionPane.ERROR_MESSAGE);
                         newPass.setText("");
                         confirmPass.setText("");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Current Password is Incorrect!");
+                    JOptionPane.showMessageDialog(null, "Current Password is Incorrect!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 

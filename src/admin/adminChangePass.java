@@ -187,6 +187,9 @@ public class adminChangePass extends javax.swing.JFrame {
         });
         jPanel3.add(curhide);
         curhide.setBounds(310, 90, 30, 30);
+
+        currentPass.setForeground(new java.awt.Color(0, 0, 204));
+        currentPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel3.add(currentPass);
         currentPass.setBounds(50, 90, 290, 30);
 
@@ -205,6 +208,9 @@ public class adminChangePass extends javax.swing.JFrame {
         });
         jPanel3.add(newhide);
         newhide.setBounds(310, 150, 30, 30);
+
+        newPass.setForeground(new java.awt.Color(0, 0, 204));
+        newPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel3.add(newPass);
         newPass.setBounds(50, 150, 290, 30);
 
@@ -230,6 +236,9 @@ public class adminChangePass extends javax.swing.JFrame {
         });
         jPanel3.add(conhide);
         conhide.setBounds(310, 210, 30, 30);
+
+        confirmPass.setForeground(new java.awt.Color(0, 0, 204));
+        confirmPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel3.add(confirmPass);
         confirmPass.setBounds(50, 210, 290, 30);
 

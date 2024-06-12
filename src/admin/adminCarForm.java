@@ -18,15 +18,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -45,6 +48,7 @@ public class adminCarForm extends javax.swing.JFrame {
         times();
         displayData();
     }
+
     
     boolean checkadd = true;
     
@@ -72,6 +76,7 @@ public class adminCarForm extends javax.swing.JFrame {
         });
         t.start();
     }
+    
     
     public String destination = "";
     File selectedFile;
@@ -176,7 +181,7 @@ public class adminCarForm extends javax.swing.JFrame {
         try{
             dbConnector dbc = new dbConnector();
             ResultSet rs = dbc.getData("SELECT * FROM tbl_car");
-            usersTable.setModel(DbUtils.resultSetToTableModel(rs));
+            carsTable.setModel(DbUtils.resultSetToTableModel(rs));
              rs.close();
         }catch(SQLException ex){
             System.out.println("Errors: "+ex.getMessage());
@@ -220,12 +225,15 @@ public class adminCarForm extends javax.swing.JFrame {
         remove = new javax.swing.JButton();
         select = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        usersTable = new javax.swing.JTable();
+        carsTable = new javax.swing.JTable();
         Add = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         clear = new javax.swing.JButton();
         delete = new javax.swing.JButton();
         update = new javax.swing.JButton();
+        carStatus = new javax.swing.JComboBox<>();
+        print = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -253,7 +261,9 @@ public class adminCarForm extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.setLayout(null);
 
+        carColor.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         carColor.setForeground(new java.awt.Color(0, 0, 204));
+        carColor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         carColor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         carColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,44 +271,52 @@ public class adminCarForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(carColor);
-        carColor.setBounds(290, 380, 230, 40);
+        carColor.setBounds(30, 660, 230, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Car Color       :");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(290, 420, 80, 40);
+        jLabel4.setBounds(30, 700, 80, 30);
 
+        carCapacity.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         carCapacity.setForeground(new java.awt.Color(0, 0, 204));
+        carCapacity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         carCapacity.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(carCapacity);
-        carCapacity.setBounds(290, 460, 230, 40);
+        carCapacity.setBounds(290, 380, 230, 40);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Car Capacity :");
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(290, 500, 80, 40);
+        jLabel5.setBounds(290, 420, 80, 30);
 
+        carRate.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         carRate.setForeground(new java.awt.Color(0, 0, 204));
+        carRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         carRate.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(carRate);
-        carRate.setBounds(290, 540, 230, 40);
+        carRate.setBounds(290, 450, 230, 40);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("Car Rate        :");
+        jLabel7.setText("Car Plate #   :");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(290, 580, 80, 40);
+        jLabel7.setBounds(290, 560, 80, 30);
 
+        carPlateNo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         carPlateNo.setForeground(new java.awt.Color(0, 0, 204));
+        carPlateNo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         carPlateNo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(carPlateNo);
-        carPlateNo.setBounds(290, 620, 230, 40);
+        carPlateNo.setBounds(290, 520, 230, 40);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("Car Plate No. :");
+        jLabel6.setText("Car Status");
         jPanel3.add(jLabel6);
-        jLabel6.setBounds(290, 660, 80, 40);
+        jLabel6.setBounds(290, 630, 80, 30);
 
+        cid.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         cid.setForeground(new java.awt.Color(0, 0, 204));
+        cid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cid.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         cid.setEnabled(false);
         jPanel3.add(cid);
@@ -307,9 +325,11 @@ public class adminCarForm extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Car  ID          :");
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(30, 420, 80, 40);
+        jLabel1.setBounds(30, 420, 80, 30);
 
+        carBrand.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         carBrand.setForeground(new java.awt.Color(0, 0, 204));
+        carBrand.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         carBrand.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         carBrand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,39 +337,43 @@ public class adminCarForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(carBrand);
-        carBrand.setBounds(30, 460, 230, 40);
+        carBrand.setBounds(30, 450, 230, 40);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Car Brand     :");
         jPanel3.add(jLabel9);
-        jLabel9.setBounds(30, 500, 80, 40);
+        jLabel9.setBounds(30, 490, 80, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Car Model     :");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(30, 580, 80, 40);
+        jLabel2.setBounds(30, 560, 80, 30);
 
+        carType.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         carType.setForeground(new java.awt.Color(0, 0, 204));
+        carType.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         carType.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(carType);
-        carType.setBounds(30, 620, 230, 40);
+        carType.setBounds(30, 590, 230, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Car Type       :");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(30, 660, 80, 40);
+        jLabel3.setBounds(30, 630, 80, 30);
 
+        carModel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         carModel.setForeground(new java.awt.Color(0, 0, 204));
+        carModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         carModel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(carModel);
-        carModel.setBounds(30, 540, 230, 40);
+        carModel.setBounds(30, 520, 230, 40);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Admin Car Form");
         jLabel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(jLabel10);
-        jLabel10.setBounds(30, 10, 900, 50);
+        jLabel10.setBounds(30, 10, 910, 50);
 
         date.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -391,18 +415,18 @@ public class adminCarForm extends javax.swing.JFrame {
         select.setBounds(10, 310, 120, 40);
 
         jPanel3.add(jPanel4);
-        jPanel4.setBounds(550, 380, 380, 360);
+        jPanel4.setBounds(560, 370, 380, 360);
 
-        usersTable.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        usersTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        carsTable.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        carsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                usersTableMouseClicked(evt);
+                carsTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(usersTable);
+        jScrollPane2.setViewportView(carsTable);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(30, 90, 900, 270);
+        jScrollPane2.setBounds(30, 90, 910, 260);
 
         Add.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Add.setText("Add");
@@ -413,7 +437,7 @@ public class adminCarForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(Add);
-        Add.setBounds(30, 710, 90, 30);
+        Add.setBounds(30, 750, 130, 30);
 
         Back.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Back.setText("Back");
@@ -424,7 +448,7 @@ public class adminCarForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(Back);
-        Back.setBounds(440, 710, 80, 30);
+        Back.setBounds(820, 750, 120, 30);
 
         clear.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         clear.setText("Clear");
@@ -435,7 +459,7 @@ public class adminCarForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(clear);
-        clear.setBounds(240, 710, 80, 30);
+        clear.setBounds(650, 750, 120, 30);
 
         delete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         delete.setText("Delete Data");
@@ -446,7 +470,7 @@ public class adminCarForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(delete);
-        delete.setBounds(340, 710, 80, 30);
+        delete.setBounds(340, 750, 120, 30);
 
         update.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         update.setText("Upadate");
@@ -458,10 +482,38 @@ public class adminCarForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(update);
-        update.setBounds(140, 710, 80, 30);
+        update.setBounds(190, 750, 120, 30);
+
+        carStatus.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        carStatus.setForeground(new java.awt.Color(0, 0, 204));
+        carStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Rented" }));
+        carStatus.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        carStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carStatusActionPerformed(evt);
+            }
+        });
+        jPanel3.add(carStatus);
+        carStatus.setBounds(290, 590, 230, 40);
+
+        print.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        print.setText("Print");
+        print.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+        jPanel3.add(print);
+        print.setBounds(500, 750, 110, 30);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Car Rate        :");
+        jPanel3.add(jLabel8);
+        jLabel8.setBounds(290, 490, 80, 30);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(30, 30, 960, 750);
+        jPanel3.setBounds(30, 30, 960, 800);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -471,7 +523,7 @@ public class adminCarForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
         );
 
         pack();
@@ -525,17 +577,18 @@ public class adminCarForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_selectActionPerformed
 
-    private void usersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTableMouseClicked
+    private void carsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carsTableMouseClicked
         // TODO add your handling code here:
-        int rowIndex = usersTable.getSelectedRow();
+        int rowIndex = carsTable.getSelectedRow();
 
         if(rowIndex < 0){
             JOptionPane.showMessageDialog(null,"Please Select an Item!");
         }else{
             try{
                 dbConnector dbc = new dbConnector();
-                TableModel tbl = usersTable.getModel();
-                ResultSet rs = dbc.getData("SELECT * FROM tbl_car WHERE c_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
+                TableModel tbl = carsTable.getModel();
+                String carId = tbl.getValueAt(rowIndex, 0).toString();
+                ResultSet rs = dbc.getData("SELECT * FROM tbl_car WHERE c_id = '"+carId+"'");
                 if(rs.next()){
                     cid.setText(""+rs.getInt("c_id"));
                     carBrand.setText(""+rs.getString("c_brand"));
@@ -545,6 +598,7 @@ public class adminCarForm extends javax.swing.JFrame {
                     carCapacity.setText(""+rs.getString("c_capacity"));
                     carRate.setText(""+rs.getString("c_rate"));
                     carPlateNo.setText(""+rs.getString("c_plateNo"));
+                    carStatus.setSelectedItem(""+rs.getString("c_status"));
                     image.setIcon(ResizeImage(rs.getString("c_image"),null,image));
                     oldpath = rs.getString("c_image");
                     path = rs.getString("c_image");
@@ -556,7 +610,7 @@ public class adminCarForm extends javax.swing.JFrame {
                 System.out.println(""+ex);
             }
         }
-    }//GEN-LAST:event_usersTableMouseClicked
+    }//GEN-LAST:event_carsTableMouseClicked
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
         // TODO add your handling code here:
@@ -568,20 +622,20 @@ public class adminCarForm extends javax.swing.JFrame {
             }else{
                 dbConnector dbc = new dbConnector();
 
-                String query = "INSERT INTO tbl_car (c_brand, c_model, c_type, c_color, c_capacity, c_rate, c_plateNo, c_image) " +
+                String query = "INSERT INTO tbl_car (c_brand, c_model, c_type, c_color, c_capacity, c_rate, c_plateNo, c_status, c_image) " +
                 "VALUES ('" + carBrand.getText() + "', '" + carModel.getText() + "', '" + carType.getText() + "', '" +
                 carColor.getText() + "', '" + carCapacity.getText() + "', '" + carRate.getText() + "', '" +
-                carPlateNo.getText() + "', '" +destination+ "')";
+                carPlateNo.getText() + "', '" + carStatus.getSelectedItem() + "', '" + destination + "')";
 
                 if(dbc.insertData(query)) {
-                    JOptionPane.showMessageDialog(null, "Inserted Successfully!");
+                    JOptionPane.showMessageDialog(null, "Inserted Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Connection Error!");
+                    JOptionPane.showMessageDialog(null, "Connection Error!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 displayData();
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Clear The Field First");
+            JOptionPane.showMessageDialog(null, "Clear The Field First", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_AddActionPerformed
 
@@ -601,6 +655,7 @@ public class adminCarForm extends javax.swing.JFrame {
         carCapacity.setText("");
         carRate.setText("");
         carPlateNo.setText("");
+        carStatus.setSelectedItem("");
         image.setIcon(null);
         Add.setEnabled(true);
         update.setEnabled(false);
@@ -611,7 +666,7 @@ public class adminCarForm extends javax.swing.JFrame {
         int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this car?", "Confirmation", JOptionPane.YES_NO_OPTION);
         if (confirmation == JOptionPane.YES_OPTION) {
             if (cid.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please select a Car to delete.");
+                JOptionPane.showMessageDialog(null, "Please select a Car to delete.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
                     int cId = Integer.parseInt(cid.getText());
@@ -620,7 +675,7 @@ public class adminCarForm extends javax.swing.JFrame {
                     // After deletion, you might want to clear the form fields or refresh the user interface
                     clearFields();
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Invalid Car ID.");
+                    JOptionPane.showMessageDialog(null, "Invalid Car ID.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -632,7 +687,7 @@ public class adminCarForm extends javax.swing.JFrame {
         if (carBrand.getText().isEmpty() || carModel.getText().isEmpty() || carType.getText().isEmpty()
             || carColor.getText().isEmpty() || carCapacity.getText().isEmpty()
             || carRate.getText().isEmpty() || carPlateNo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please fill in all required data.");
+            JOptionPane.showMessageDialog(null, "Please fill in all required data.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             dbConnector dbc = new dbConnector();
             dbc.updateData("UPDATE tbl_car SET "
@@ -643,6 +698,7 @@ public class adminCarForm extends javax.swing.JFrame {
                 + "c_capacity = '" + carCapacity.getText() + "', "
                 + "c_rate = '" + carRate.getText() + "', "
                 + "c_plateNo = '" + carPlateNo.getText() + "', "
+                + "c_status = '" + carStatus.getSelectedItem() + "', "
                 + "c_image = '" + destination + "' "
                 + "WHERE c_id = '" + Integer.valueOf(cid.getText()) + "'");
 
@@ -659,6 +715,42 @@ public class adminCarForm extends javax.swing.JFrame {
             displayData();
         }
     }//GEN-LAST:event_updateActionPerformed
+
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        // TODO add your handling code here:
+        int rowIndex = carsTable.getSelectedRow();
+
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null,"Please Select an Item!", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try{
+                dbConnector dbc = new dbConnector();
+                TableModel tbl = carsTable.getModel();
+                ResultSet rs = dbc.getData("SELECT * FROM tbl_car WHERE c_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
+                if(rs.next()){
+                    adminIndividualCarPrinting aip = new adminIndividualCarPrinting();
+                    aip.cid.setText(""+rs.getInt("c_id"));
+                    aip.cBrand.setText(""+rs.getString("c_brand"));
+                    aip.cModel.setText(""+rs.getString("c_model"));
+                    aip.cType.setText(""+rs.getString("c_type"));
+                    aip.cColor.setText(""+rs.getString("c_color"));
+                    aip.cCapacity.setText(""+rs.getString("c_capacity"));
+                    aip.cRate.setText(""+rs.getString("c_rate"));
+                    aip.cStatus.setText(""+rs.getString("c_status"));
+
+                    aip.image.setIcon(aip.ResizeImage(rs.getString("c_image"),null,aip.image));
+                    aip.setVisible(true);
+                    this.dispose();
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex);
+            }
+        }
+    }//GEN-LAST:event_printActionPerformed
+
+    private void carStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_carStatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -735,7 +827,9 @@ public class adminCarForm extends javax.swing.JFrame {
     public javax.swing.JTextField carModel;
     public javax.swing.JTextField carPlateNo;
     public javax.swing.JTextField carRate;
+    public javax.swing.JComboBox<String> carStatus;
     public javax.swing.JTextField carType;
+    private javax.swing.JTable carsTable;
     public javax.swing.JTextField cid;
     private javax.swing.JButton clear;
     private javax.swing.JLabel date;
@@ -749,16 +843,17 @@ public class adminCarForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton print;
     public javax.swing.JButton remove;
     public javax.swing.JButton select;
     private javax.swing.JLabel time;
     public javax.swing.JButton update;
-    private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 }

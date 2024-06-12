@@ -241,7 +241,6 @@ public class adminSignUp extends javax.swing.JFrame {
         username = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         status = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         update = new javax.swing.JButton();
@@ -264,7 +263,6 @@ public class adminSignUp extends javax.swing.JFrame {
         clear = new javax.swing.JButton();
         date = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
-        contact = new javax.swing.JTextField();
         userType = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         hide = new javax.swing.JLabel();
@@ -286,7 +284,9 @@ public class adminSignUp extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(null);
 
+        username.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         username.setForeground(new java.awt.Color(0, 0, 204));
+        username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         username.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,20 +306,17 @@ public class adminSignUp extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(20, 400, 80, 30);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("Contact");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(20, 460, 80, 30);
-
+        status.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        status.setForeground(new java.awt.Color(0, 0, 204));
         status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Pending" }));
         status.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(status);
-        status.setBounds(20, 550, 230, 30);
+        status.setBounds(20, 490, 230, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("User Type");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 520, 80, 30);
+        jLabel6.setBounds(20, 460, 80, 30);
 
         update.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         update.setText("Upadate Data");
@@ -331,7 +328,7 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(update);
-        update.setBounds(150, 610, 90, 30);
+        update.setBounds(160, 560, 90, 30);
 
         back.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         back.setText("Back");
@@ -342,15 +339,19 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(back);
-        back.setBounds(520, 610, 90, 30);
+        back.setBounds(530, 560, 90, 30);
 
+        uid.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         uid.setForeground(new java.awt.Color(0, 0, 204));
+        uid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         uid.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         uid.setEnabled(false);
         jPanel1.add(uid);
         uid.setBounds(20, 70, 230, 30);
 
+        fname.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         fname.setForeground(new java.awt.Color(0, 0, 204));
+        fname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fname.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -370,7 +371,9 @@ public class adminSignUp extends javax.swing.JFrame {
         jPanel1.add(jLabel9);
         jLabel9.setBounds(20, 160, 80, 30);
 
+        lname.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lname.setForeground(new java.awt.Color(0, 0, 204));
+        lname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lname.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(lname);
         lname.setBounds(20, 190, 230, 30);
@@ -380,7 +383,9 @@ public class adminSignUp extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 220, 80, 30);
 
+        em.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         em.setForeground(new java.awt.Color(0, 0, 204));
+        em.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         em.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(em);
         em.setBounds(20, 250, 230, 30);
@@ -399,7 +404,7 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addData);
-        addData.setBounds(20, 610, 90, 30);
+        addData.setBounds(30, 560, 90, 30);
 
         delete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         delete.setText("Delete Data");
@@ -410,7 +415,7 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(delete);
-        delete.setBounds(270, 610, 90, 30);
+        delete.setBounds(280, 560, 90, 30);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -422,7 +427,7 @@ public class adminSignUp extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.setLayout(null);
         jPanel3.add(image);
-        image.setBounds(10, 10, 340, 410);
+        image.setBounds(10, 10, 340, 370);
 
         select.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         select.setText("Select");
@@ -433,7 +438,7 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel3.add(select);
-        select.setBounds(10, 430, 90, 30);
+        select.setBounds(10, 390, 90, 30);
 
         remove.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         remove.setText("Remove");
@@ -444,10 +449,10 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel3.add(remove);
-        remove.setBounds(260, 430, 90, 30);
+        remove.setBounds(260, 390, 90, 30);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(270, 110, 360, 470);
+        jPanel3.setBounds(270, 110, 360, 430);
 
         clear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         clear.setText("Clear ");
@@ -458,7 +463,7 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(clear);
-        clear.setBounds(400, 610, 90, 30);
+        clear.setBounds(410, 560, 90, 30);
 
         date.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -470,10 +475,8 @@ public class adminSignUp extends javax.swing.JFrame {
         jPanel1.add(time);
         time.setBounds(450, 70, 110, 30);
 
-        contact.setForeground(new java.awt.Color(0, 0, 204));
-        jPanel1.add(contact);
-        contact.setBounds(20, 430, 230, 30);
-
+        userType.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        userType.setForeground(new java.awt.Color(0, 0, 204));
         userType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
         userType.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         userType.addActionListener(new java.awt.event.ActionListener() {
@@ -482,12 +485,12 @@ public class adminSignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(userType);
-        userType.setBounds(20, 490, 230, 30);
+        userType.setBounds(20, 430, 230, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("User Status");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(20, 580, 80, 30);
+        jLabel8.setBounds(20, 520, 80, 30);
 
         hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/hide-Pass.png"))); // NOI18N
         hide.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -505,12 +508,14 @@ public class adminSignUp extends javax.swing.JFrame {
         jPanel1.add(show);
         show.setBounds(220, 370, 30, 30);
 
+        password.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         password.setForeground(new java.awt.Color(0, 0, 204));
+        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel1.add(password);
         password.setBounds(20, 370, 230, 30);
 
         jPanel2.add(jPanel1);
-        jPanel1.setBounds(30, 30, 650, 660);
+        jPanel1.setBounds(30, 30, 650, 610);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -520,9 +525,7 @@ public class adminSignUp extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
         );
 
         pack();
@@ -531,13 +534,12 @@ public class adminSignUp extends javax.swing.JFrame {
 
     private void addDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataActionPerformed
         // TODO add your handling code here:
-        if(fname.getText().isEmpty() || lname.getText().isEmpty() || em.getText().isEmpty() || contact.getText().isEmpty() || username.getText().isEmpty() || password.getText().isEmpty()){
+        if(fname.getText().isEmpty() || lname.getText().isEmpty() || em.getText().isEmpty() || username.getText().isEmpty() || password.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill in all required Data.");
         }else if (password.getText().length() < 8) {
             JOptionPane.showMessageDialog(null, "Password should have at least 8 characters or Above.");
             password.setText("");
-        }else if (!contact.getText().matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Contact must contain only numbers.");
+        
         }else if(duplicateCheck()){    
             System.out.println("Duplicated Exist");
         }else{
@@ -545,17 +547,20 @@ public class adminSignUp extends javax.swing.JFrame {
     
             try {    
                 String pass = passwordHasher.hashPassword(password.getText());
-                if (dbc.insertData("INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_contact,u_account, u_status, u_image) "
-                    + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+em.getText()+"', '"+username.getText()+"', '"
-                    + pass+"', '"+contact.getText()+"', '"+status.getSelectedItem()+"', 'Pending', '"+destination+ "')")) {
-            
+                
+                String query = "INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_account, u_status, u_image) " +
+                "VALUES ('" + fname.getText() + "', '" + lname.getText() + "', '" + em.getText() + "', '" +
+                username.getText() + "', '" +pass+ "', '" + userType.getSelectedItem() + "', '" +
+                status.getSelectedItem() + "', '" + destination + "')";
+
+                if(dbc.insertData(query)) {
                     JOptionPane.showMessageDialog(null, "Registration Success", "Success", JOptionPane.INFORMATION_MESSAGE);
                     adminUsersForm ad = new adminUsersForm();
                     ad.setVisible(true);
                     this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Connection Error", "Error", JOptionPane.ERROR_MESSAGE);
-                } 
+                    JOptionPane.showMessageDialog(null, "Connection Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } catch (NoSuchAlgorithmException ex) {
                 System.out.println("" + ex);
             }
@@ -565,16 +570,11 @@ public class adminSignUp extends javax.swing.JFrame {
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
         if(fname.getText().isEmpty() || lname.getText().isEmpty() || em.getText().isEmpty() 
-            || username.getText().isEmpty() || password.getText().isEmpty() || contact.getText().isEmpty()){
+            || username.getText().isEmpty() || password.getText().isEmpty() ){
             JOptionPane.showMessageDialog(null, "Please fill in all required Data.");
         }else if (password.getText().length() < 8) {
             JOptionPane.showMessageDialog(null, "Password should have at least 8 characters or Above.");
             password.setText("");
-        }else if (contact.getText().length() != 11) {
-            JOptionPane.showMessageDialog(null, "Contact Number must contain 11 digit numbers.");
-        }else if (!contact.getText().matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Contact Number must contain only numbers.");
-            contact.setText("");
         }else if(updateCheck()){    
             System.out.println("Duplicated Exist");
         }else{
@@ -585,7 +585,6 @@ public class adminSignUp extends javax.swing.JFrame {
             + "u_email = '"+em.getText()+"', "
             + "u_username ='"+username.getText()+ "', "
             + "u_password = '"+password.getText()+"', "
-            + "u_contact ='"+contact.getText()+"', "
             + "u_account = '"+userType.getSelectedItem()+"', "
             + "u_status = '"+status.getSelectedItem()+"', " 
             + "u_image = '"+destination+"' "
@@ -749,7 +748,6 @@ public class adminSignUp extends javax.swing.JFrame {
     public javax.swing.JButton addData;
     private javax.swing.JButton back;
     private javax.swing.JButton clear;
-    public javax.swing.JTextField contact;
     private javax.swing.JLabel date;
     private javax.swing.JButton delete;
     public javax.swing.JTextField em;
@@ -763,7 +761,6 @@ public class adminSignUp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

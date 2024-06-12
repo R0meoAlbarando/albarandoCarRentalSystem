@@ -168,7 +168,6 @@ public class signupForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         cancel = new javax.swing.JButton();
         Register = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -179,7 +178,6 @@ public class signupForm extends javax.swing.JFrame {
         image = new javax.swing.JLabel();
         remove = new javax.swing.JButton();
         select = new javax.swing.JButton();
-        contact = new javax.swing.JTextField();
         status = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -195,16 +193,19 @@ public class signupForm extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         fname.setForeground(new java.awt.Color(0, 0, 204));
+        fname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fname.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(fname);
         fname.setBounds(20, 70, 220, 30);
 
         lname.setForeground(new java.awt.Color(0, 0, 204));
+        lname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lname.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(lname);
         lname.setBounds(20, 130, 220, 30);
 
         em.setForeground(new java.awt.Color(0, 0, 204));
+        em.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         em.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         em.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +216,7 @@ public class signupForm extends javax.swing.JFrame {
         em.setBounds(20, 190, 220, 30);
 
         username.setForeground(new java.awt.Color(0, 0, 204));
+        username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         username.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,11 +251,6 @@ public class signupForm extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(260, 220, 70, 30);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("Contact Number");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 280, 100, 30);
-
         cancel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         cancel.setText("Cancel");
         cancel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -263,7 +260,7 @@ public class signupForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(cancel);
-        cancel.setBounds(300, 510, 180, 30);
+        cancel.setBounds(300, 460, 180, 30);
 
         Register.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Register.setText("Register");
@@ -274,7 +271,7 @@ public class signupForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Register);
-        Register.setBounds(300, 360, 180, 30);
+        Register.setBounds(300, 310, 180, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -299,6 +296,7 @@ public class signupForm extends javax.swing.JFrame {
         hide.setBounds(450, 190, 30, 30);
 
         password.setForeground(new java.awt.Color(0, 0, 204));
+        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel1.add(password);
         password.setBounds(260, 190, 220, 30);
 
@@ -308,12 +306,12 @@ public class signupForm extends javax.swing.JFrame {
         image.setBounds(10, 10, 240, 200);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(20, 320, 260, 220);
+        jPanel3.setBounds(20, 270, 260, 220);
 
         remove.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         remove.setText("Remove Image");
         jPanel1.add(remove);
-        remove.setBounds(300, 460, 180, 30);
+        remove.setBounds(300, 410, 180, 30);
 
         select.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         select.setText("Select Image");
@@ -323,11 +321,7 @@ public class signupForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(select);
-        select.setBounds(300, 410, 180, 30);
-
-        contact.setForeground(new java.awt.Color(0, 0, 204));
-        jPanel1.add(contact);
-        contact.setBounds(20, 250, 220, 30);
+        select.setBounds(300, 360, 180, 30);
 
         status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
         status.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -340,11 +334,11 @@ public class signupForm extends javax.swing.JFrame {
         jLabel9.setBounds(260, 160, 70, 30);
 
         jPanel2.add(jPanel1);
-        jPanel1.setBounds(30, 310, 500, 560);
+        jPanel1.setBounds(30, 350, 500, 520);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/1.png"))); // NOI18N
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(-120, 0, 540, 590);
+        jLabel8.setBounds(-120, 10, 540, 590);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,20 +362,16 @@ public class signupForm extends javax.swing.JFrame {
         } else if (password.getText().length() < 8) {
             JOptionPane.showMessageDialog(null, "Password should have at least 8 characters or Above.");
             password.setText("");
-        }else if (contact.getText().length() != 11) {
-            JOptionPane.showMessageDialog(null, "Contact Number must contain 11 digit numbers.");
-        }else if (!contact.getText().matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Contact Number must contain only numbers.");
-        } else if(DuplicateCheck()){    
+        }else if(DuplicateCheck()){    
             System.out.println("Duplicate Exists");
         } else {
             dbConnector dbc = new dbConnector();
     
             try {    
                 String pass = passwordHasher.hashPassword(password.getText());
-                if (dbc.insertData("INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_contact,u_account, u_status, u_image) "
+                if (dbc.insertData("INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_account, u_status, u_image) "
                     + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+em.getText()+"', '"+username.getText()+"', '"
-                    + pass+"', '"+contact.getText()+"', '"+status.getSelectedItem()+"', 'Pending', '"+destination+ "')")) {
+                    + pass+"', '"+status.getSelectedItem()+"', 'Pending', '"+destination+ "')")) {
             
                     JOptionPane.showMessageDialog(null, "Registration Success", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loginForm ad = new loginForm();
@@ -489,7 +479,6 @@ public class signupForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Register;
     private javax.swing.JButton cancel;
-    private javax.swing.JTextField contact;
     private javax.swing.JTextField em;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel hide;
@@ -499,7 +488,6 @@ public class signupForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

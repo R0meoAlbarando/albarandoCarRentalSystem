@@ -121,7 +121,7 @@ public class userDetails extends javax.swing.JFrame {
         acc_user.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_user.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(acc_user);
-        acc_user.setBounds(130, 90, 520, 40);
+        acc_user.setBounds(130, 90, 710, 40);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user emote.png"))); // NOI18N
         jPanel2.add(jLabel2);
@@ -132,27 +132,27 @@ public class userDetails extends javax.swing.JFrame {
         jLabel8.setText("USER DETAILS");
         jLabel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(300, 10, 170, 30);
+        jLabel8.setBounds(370, 10, 170, 30);
 
         idDisplay.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         idDisplay.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         idDisplay.setText("User ID");
         idDisplay.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(idDisplay);
-        idDisplay.setBounds(340, 50, 90, 30);
+        idDisplay.setBounds(410, 50, 90, 30);
 
         date.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(date);
-        date.setBounds(540, 10, 110, 30);
+        date.setBounds(730, 10, 110, 30);
 
         time.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(time);
-        time.setBounds(540, 50, 110, 30);
+        time.setBounds(730, 50, 110, 30);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 10, 660, 140);
+        jPanel2.setBounds(20, 20, 860, 140);
 
         jPanel3.setBackground(new java.awt.Color(255, 0, 0));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -162,61 +162,65 @@ public class userDetails extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("First Name ");
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(450, 50, 210, 30);
+        jLabel1.setBounds(40, 420, 210, 30);
 
         fname.setForeground(new java.awt.Color(0, 0, 204));
         fname.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        fname.setEnabled(false);
         jPanel3.add(fname);
-        fname.setBounds(450, 20, 210, 30);
+        fname.setBounds(40, 390, 210, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Last Name ");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(450, 110, 210, 30);
+        jLabel3.setBounds(40, 480, 210, 30);
 
         lname.setForeground(new java.awt.Color(0, 0, 204));
         lname.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lname.setEnabled(false);
         jPanel3.add(lname);
-        lname.setBounds(450, 80, 210, 30);
+        lname.setBounds(40, 450, 210, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Email ");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(450, 170, 210, 30);
+        jLabel4.setBounds(40, 540, 210, 30);
 
         em.setForeground(new java.awt.Color(0, 0, 204));
         em.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        em.setEnabled(false);
         em.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emActionPerformed(evt);
             }
         });
         jPanel3.add(em);
-        em.setBounds(450, 140, 210, 30);
+        em.setBounds(40, 510, 210, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Username");
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(450, 230, 210, 30);
+        jLabel5.setBounds(340, 420, 210, 30);
 
         username.setForeground(new java.awt.Color(0, 0, 204));
         username.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        username.setEnabled(false);
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameActionPerformed(evt);
             }
         });
         jPanel3.add(username);
-        username.setBounds(450, 200, 210, 30);
+        username.setBounds(340, 390, 210, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("User Type");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(450, 290, 210, 30);
+        jLabel7.setBounds(340, 480, 210, 30);
 
         userType.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         userType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin", "Car Owner" }));
@@ -233,12 +237,12 @@ public class userDetails extends javax.swing.JFrame {
             }
         });
         jPanel3.add(userType);
-        userType.setBounds(450, 260, 210, 30);
+        userType.setBounds(340, 450, 210, 30);
 
         jScrollPane1.setViewportView(usersTable);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 452, 420);
+        jScrollPane1.setBounds(40, 50, 790, 300);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("Change Password");
@@ -249,7 +253,7 @@ public class userDetails extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton1);
-        jButton1.setBounds(450, 340, 210, 30);
+        jButton1.setBounds(620, 390, 210, 30);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setText("Back");
@@ -260,22 +264,20 @@ public class userDetails extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton2);
-        jButton2.setBounds(450, 380, 210, 30);
+        jButton2.setBounds(620, 450, 210, 30);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 150, 660, 420);
+        jPanel3.setBounds(20, 170, 860, 590);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
         );
 
         pack();

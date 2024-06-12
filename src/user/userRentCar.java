@@ -5,12 +5,21 @@
  */
 package user;
 
+import config.dbConnector;
 import config.session;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.TableModel;
+import login.loginForm;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -25,6 +34,22 @@ public class userRentCar extends javax.swing.JFrame {
         initComponents();
         dt();
         times();
+        displayData();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate localDate = LocalDate.now();
+        dRentCar.setText(""+dtf.format(localDate));
+    }
+    
+    public void displayData(){
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT * FROM tbl_carrent");
+            RentedTable.setModel(DbUtils.resultSetToTableModel(rs));
+             rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        
+        }
     }
     
     public void dt(){
@@ -52,7 +77,17 @@ public class userRentCar extends javax.swing.JFrame {
         t.start();
     }
     
-    
+    private void clearFields() {
+        // Clear all the text fields and reset selected items to default
+        transID.setText("");
+        cid.setText("");
+        status.setSelectedItem("");
+        dRentCar.setText("");
+        dReturnCar.setText("");
+        contact.setText("");
+    }
+
+    private static java.text.SimpleDateFormat scannerDateFormat = new java.text.SimpleDateFormat("MM/dd/yyyy");
     
 
     /**
@@ -75,21 +110,33 @@ public class userRentCar extends javax.swing.JFrame {
         comboCarID = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        comboUID = new javax.swing.JComboBox<>();
-        Cancel = new javax.swing.JButton();
-        RentCar = new javax.swing.JButton();
-        uCon = new javax.swing.JTextField();
-        crid = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        comboCID = new javax.swing.JComboBox<>();
-        status = new javax.swing.JTextField();
+        transID = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        RentedTable = new javax.swing.JTable();
+        cid = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        dReturnCar = new javax.swing.JTextField();
+        dRentCar = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        status = new javax.swing.JComboBox<>();
+        contact = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cRate = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        day = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        totalPay = new javax.swing.JTextField();
+        Rent = new javax.swing.JButton();
+        update = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
+        Cancel = new javax.swing.JButton();
+        paymentStat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -129,57 +176,195 @@ public class userRentCar extends javax.swing.JFrame {
             }
         });
         jPanel2.add(acc_user);
-        acc_user.setBounds(140, 70, 400, 40);
+        acc_user.setBounds(140, 70, 910, 40);
 
         date.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(date);
-        date.setBounds(270, 0, 130, 30);
+        date.setBounds(440, 20, 130, 30);
 
         time.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(time);
-        time.setBounds(270, 30, 130, 30);
+        time.setBounds(580, 20, 130, 30);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 10, 560, 120);
+        jPanel2.setBounds(20, 20, 1060, 120);
 
         comboCarID.setBackground(new java.awt.Color(255, 0, 0));
         comboCarID.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         comboCarID.setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("Date of Return Car  :");
+        jLabel4.setText("Total Payment        :");
         comboCarID.add(jLabel4);
-        jLabel4.setBounds(60, 400, 130, 30);
+        jLabel4.setBounds(450, 580, 120, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Car ID                         :");
         comboCarID.add(jLabel5);
-        jLabel5.setBounds(60, 150, 130, 30);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("User ID                       :");
-        comboCarID.add(jLabel6);
-        jLabel6.setBounds(60, 200, 130, 30);
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel9.setText("User Contact   #       :");
-        comboCarID.add(jLabel9);
-        jLabel9.setBounds(60, 300, 130, 30);
+        jLabel5.setBounds(50, 430, 120, 30);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Date of Rent Car      :");
         comboCarID.add(jLabel10);
-        jLabel10.setBounds(60, 350, 130, 30);
+        jLabel10.setBounds(50, 530, 120, 30);
 
-        comboUID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboUID.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        comboCarID.add(comboUID);
-        comboUID.setBounds(210, 200, 290, 30);
+        transID.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        transID.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        transID.setEnabled(false);
+        comboCarID.add(transID);
+        transID.setBounds(180, 380, 230, 30);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setText("Status                        :");
+        comboCarID.add(jLabel14);
+        jLabel14.setBounds(50, 480, 120, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText(" CAR RENTAL TRANSACTION");
+        jLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        comboCarID.add(jLabel3);
+        jLabel3.setBounds(20, 20, 1020, 60);
+
+        RentedTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RentedTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(RentedTable);
+
+        comboCarID.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 90, 1020, 260);
+
+        cid.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        cid.setEnabled(false);
+        comboCarID.add(cid);
+        cid.setBounds(180, 430, 200, 30);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setText("Transaction ID         :");
+        comboCarID.add(jLabel13);
+        jLabel13.setBounds(50, 380, 120, 30);
+
+        dReturnCar.setBackground(new java.awt.Color(240, 240, 240));
+        dReturnCar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        comboCarID.add(dReturnCar);
+        dReturnCar.setBounds(180, 580, 230, 30);
+
+        dRentCar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        dRentCar.setEnabled(false);
+        comboCarID.add(dRentCar);
+        dRentCar.setBounds(180, 530, 230, 30);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-add-30.png"))); // NOI18N
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
+        comboCarID.add(jLabel15);
+        jLabel15.setBounds(380, 430, 30, 30);
+
+        status.setBackground(new java.awt.Color(240, 240, 240));
+        status.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Rented" }));
+        status.setEnabled(false);
+        comboCarID.add(status);
+        status.setBounds(180, 480, 230, 30);
+
+        contact.setBackground(new java.awt.Color(240, 240, 240));
+        contact.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        comboCarID.add(contact);
+        contact.setBounds(580, 430, 230, 30);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("Date of Return Car  :");
+        comboCarID.add(jLabel6);
+        jLabel6.setBounds(50, 580, 120, 30);
+
+        cRate.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        cRate.setEnabled(false);
+        comboCarID.add(cRate);
+        cRate.setBounds(580, 480, 230, 30);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Day                             :");
+        comboCarID.add(jLabel7);
+        jLabel7.setBounds(450, 380, 120, 30);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Contact Number      :");
+        comboCarID.add(jLabel8);
+        jLabel8.setBounds(450, 430, 120, 30);
+
+        day.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        comboCarID.add(day);
+        day.setBounds(580, 380, 230, 30);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Car Rate                   :");
+        comboCarID.add(jLabel9);
+        jLabel9.setBounds(450, 480, 120, 30);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setText("Payment Status     :");
+        comboCarID.add(jLabel11);
+        jLabel11.setBounds(450, 530, 120, 30);
+
+        totalPay.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        totalPay.setEnabled(false);
+        comboCarID.add(totalPay);
+        totalPay.setBounds(580, 580, 230, 30);
+
+        Rent.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        Rent.setText("Rent Car");
+        Rent.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Rent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RentActionPerformed(evt);
+            }
+        });
+        comboCarID.add(Rent);
+        Rent.setBounds(860, 380, 140, 30);
+
+        update.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        update.setText("Update");
+        update.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+        comboCarID.add(update);
+        update.setBounds(860, 430, 140, 30);
+
+        delete.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        delete.setText("Delete");
+        delete.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+        comboCarID.add(delete);
+        delete.setBounds(860, 480, 140, 30);
+
+        clear.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        clear.setText("Clear");
+        clear.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+        comboCarID.add(clear);
+        clear.setBounds(860, 530, 140, 30);
 
         Cancel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Cancel.setText("Cancel");
+        Cancel.setText("Back");
         Cancel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,91 +372,37 @@ public class userRentCar extends javax.swing.JFrame {
             }
         });
         comboCarID.add(Cancel);
-        Cancel.setBounds(400, 450, 100, 30);
+        Cancel.setBounds(860, 580, 140, 30);
 
-        RentCar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        RentCar.setText("Rent Car");
-        RentCar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RentCar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RentCarActionPerformed(evt);
-            }
-        });
-        comboCarID.add(RentCar);
-        RentCar.setBounds(60, 450, 100, 30);
-
-        uCon.setForeground(new java.awt.Color(0, 0, 204));
-        uCon.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        comboCarID.add(uCon);
-        uCon.setBounds(210, 300, 290, 30);
-
-        crid.setForeground(new java.awt.Color(0, 0, 204));
-        crid.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        crid.setEnabled(false);
-        comboCarID.add(crid);
-        crid.setBounds(210, 100, 290, 30);
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setText("Transaction ID         :");
-        comboCarID.add(jLabel12);
-        jLabel12.setBounds(60, 100, 130, 30);
-
-        comboCID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboCID.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        comboCarID.add(comboCID);
-        comboCID.setBounds(210, 150, 290, 30);
-
-        status.setForeground(new java.awt.Color(0, 0, 204));
-        status.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        comboCarID.add(status);
-        status.setBounds(210, 250, 290, 30);
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setText("Status                        :");
-        comboCarID.add(jLabel14);
-        jLabel14.setBounds(60, 250, 130, 30);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(" CAR RENTAL TRANSACTION");
-        jLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        comboCarID.add(jLabel3);
-        jLabel3.setBounds(10, 10, 540, 40);
-
-        jDateChooser1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        comboCarID.add(jDateChooser1);
-        jDateChooser1.setBounds(210, 400, 290, 30);
-
-        jDateChooser2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jDateChooser2.setDateFormatString("MMM / d / yyyy");
-        comboCarID.add(jDateChooser2);
-        jDateChooser2.setBounds(210, 350, 290, 30);
+        paymentStat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        paymentStat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unpaid", "Paid" }));
+        paymentStat.setEnabled(false);
+        comboCarID.add(paymentStat);
+        paymentStat.setBounds(580, 530, 230, 30);
 
         jPanel1.add(comboCarID);
-        comboCarID.setBounds(10, 140, 560, 500);
+        comboCarID.setBounds(20, 160, 1060, 630);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1097, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RentCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_RentCarActionPerformed
-
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         // TODO add your handling code here:
+        userDashboard ads = new userDashboard();
+        ads.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CancelActionPerformed
 
     private void acc_userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acc_userMouseClicked
@@ -281,8 +412,193 @@ public class userRentCar extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         session sess = session.getInstance();
-        acc_user.setText(" "+sess.getFname()+" "+sess.getLname());
+        if(sess.getUid()==0){
+            JOptionPane.showMessageDialog(null,  "No Account, Login First", "Error", JOptionPane.ERROR_MESSAGE);
+            loginForm log = new loginForm();
+            log.setVisible(true);
+            this.dispose();
+        }else{
+            acc_user.setText(" "+sess.getFname()+" "+sess.getLname());
+        }
     }//GEN-LAST:event_formWindowActivated
+
+    private void RentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentActionPerformed
+        // TODO add your handling code here:
+        session sess = session.getInstance();
+
+        if (contact.getText().isEmpty() || dReturnCar.getText().isEmpty() || cRate.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all required data.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!contact.getText().matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "Contact must contain only numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (contact.getText().length() != 11) {
+            JOptionPane.showMessageDialog(null, "Contact Number must contain 11 digit numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            dbConnector dbc = new dbConnector();
+
+            String stat = status.getSelectedItem().toString();
+
+            if (stat.equals("Available")) {
+                String query = "INSERT INTO tbl_carrent (c_id, u_id, status, car_rent_date, car_return_date, day, u_contact, c_rate, paymentStat, totalPay) " +
+                "VALUES ('" + cid.getText() + "', '" + sess.getUid() + "', '" +
+                stat + "', '" + dRentCar.getText() + "', '" + dReturnCar.getText() + "', '" + 
+                day.getText() +"', '" + contact.getText() + "', '" + cRate.getText() +"', 'Unpaid', '"+ totalPay.getText() + "')";
+
+                if (dbc.insertData(query)) {
+                    // Update the status to "Rented" in tbl_car
+                    String updateQueryCar = "UPDATE tbl_car SET c_status = 'Rented' WHERE c_id = '" + cid.getText() + "'";
+                    dbc.updateData(updateQueryCar);
+    
+                    // Update the status to "Rented" in tbl_carrent
+                    String updateQueryCarRent = "UPDATE tbl_carrent SET status = 'Rented' WHERE c_id = '" + cid.getText() + "'";
+                    dbc.updateData(updateQueryCarRent);
+            
+                    displayData();
+            
+                    // Disable the button after successful addition
+                    Rent.setEnabled(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Failed to add data. Connection Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (stat.equals("Rented")) {
+                JOptionPane.showMessageDialog(null, "Cannot add data. The selected car is already rented.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_RentActionPerformed
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        userCarTable ct = new userCarTable();
+        ct.setVisible(true);
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        // TODO add your handling code here:
+        if (dReturnCar.getText().isEmpty() || contact.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all required data.","Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            dbConnector dbc = new dbConnector();
+
+            String sql = "UPDATE tbl_carrent SET "
+            + "c_id = '" + cid.getText() + "', "
+            + "status = '" + status.getSelectedItem() + "', "
+            + "car_rent_date = '" + dRentCar.getText() + "', "
+            + "car_return_date = '" + dReturnCar.getText() + "', "
+            + "day = '" + day.getText() + "', "
+            + "u_contact = '" + contact.getText() + "', "
+            + "c_rate = '" + cRate.getText() + "', " 
+            + "totalPay = '" + totalPay.getText() + "' "
+            + "WHERE carRent_ID = '" + Integer.valueOf(transID.getText()) + "' AND u_id = '" + session.getInstance().getUid() + "'";
+
+            dbc.updateData(sql);
+            displayData();
+        }
+    }//GEN-LAST:event_updateActionPerformed
+
+    private void RentedTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RentedTableMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = RentedTable.getSelectedRow();
+
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null,"Please Select an Item!","Warning", JOptionPane.WARNING_MESSAGE);
+        }else{
+            try{
+                dbConnector dbc = new dbConnector();
+                TableModel tbl = RentedTable.getModel();
+                ResultSet rs = dbc.getData("SELECT * FROM tbl_carrent WHERE carRent_ID = '"+tbl.getValueAt(rowIndex, 0)+"'");
+                if(rs.next()){
+                    transID.setText(""+rs.getInt("carRent_ID"));
+                    cid.setText(""+rs.getString("c_id"));
+                    status.setSelectedItem(""+rs.getString("status"));
+                    dRentCar.setText(""+rs.getString("car_rent_date"));
+                    dReturnCar.setText(""+rs.getString("car_return_date"));
+                    day.setText(""+rs.getString("day"));
+                    contact.setText(""+rs.getString("u_contact"));
+                    cRate.setText(""+rs.getString("c_rate"));
+                    totalPay.setText(""+rs.getString("totalPay"));
+                    Rent.setEnabled(false);
+                    update.setEnabled(true);
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex);
+            }
+        }
+    }//GEN-LAST:event_RentedTableMouseClicked
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this Transaction?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (confirmation == JOptionPane.YES_OPTION) {
+            if (transID.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please select a Transaction to delete.","Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    dbConnector dbc = new dbConnector();
+                    session sess = session.getInstance();
+                    String stat = status.getSelectedItem().toString();
+                    String payment = paymentStat.getSelectedItem().toString();
+        
+                    if (stat.equals("Rented")) {
+                        String query = "UPDATE tbl_carrent SET status = 'Available', car_rent_date = '" + dRentCar.getText() + "', car_return_date = '" + 
+                        dReturnCar.getText() + "', day = '" + day.getText() + "', u_contact = '" + contact.getText() + "', c_rate = '" + cRate.getText() + 
+                        "', paymentStat = '" + payment + "', totalPay = '" + totalPay.getText() + "' WHERE c_id = '" + cid.getText() + 
+                        "' AND u_id = '" + sess.getUid() + "'";
+                
+                        if (payment.equals("Paid")) {
+                            JOptionPane.showMessageDialog(null, "Cannot delete a transaction that already 'Paid'. ","Warning", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            if (dbc.insertData(query)) {
+                                String updateQueryCar = "UPDATE tbl_car SET c_status = 'Available' WHERE c_id = '" + cid.getText() + "'";
+                                dbc.updateData(updateQueryCar);
+        
+                                String deleteQueryCarRent = "DELETE FROM tbl_carrent WHERE carRent_ID = '" + transID.getText() + "' AND c_id = '" + 
+                                cid.getText() + "' AND u_id = '" + sess.getUid() + "'";
+                                dbc.updateData(deleteQueryCarRent);
+                        
+                                int carRent_ID = Integer.parseInt(transID.getText());
+                                dbc.deleteTransact(carRent_ID);
+                        
+                                // Clear form fields after deletion
+                                transID.setText("");
+                                cid.setText("");
+                                status.setSelectedItem("");
+                                dRentCar.setText("");
+                                dReturnCar.setText("");
+                                day.setText("");
+                                contact.setText("");
+                                cRate.setText("");
+                                paymentStat.setSelectedItem("");
+                                totalPay.setText("");
+                        
+                                displayData();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Failed to update data. Connection Error!","Warning", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid status. Please select 'Rented' Car.","Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Invalid Transaction ID.","Warning", JOptionPane.WARNING_MESSAGE);
+                }
+           }
+        }
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+        transID.setText("");
+        cid.setText("");
+        status.setSelectedItem("");
+        dRentCar.setText("");
+        dReturnCar.setText("");
+        day.setText("");
+        contact.setText("");
+        cRate.setText("");
+        paymentStat.setSelectedItem("");
+        totalPay.setText("");
+        Rent.setEnabled(true);
+        update.setEnabled(false);
+    }//GEN-LAST:event_clearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,6 +627,12 @@ public class userRentCar extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -322,30 +644,42 @@ public class userRentCar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
-    private javax.swing.JButton RentCar;
+    private javax.swing.JButton Rent;
+    public javax.swing.JTable RentedTable;
     private javax.swing.JLabel acc_user;
-    private javax.swing.JComboBox<String> comboCID;
+    public javax.swing.JTextField cRate;
+    public javax.swing.JTextField cid;
+    private javax.swing.JButton clear;
     private javax.swing.JPanel comboCarID;
-    private javax.swing.JComboBox<String> comboUID;
-    private javax.swing.JTextField crid;
+    public javax.swing.JTextField contact;
+    public javax.swing.JTextField dRentCar;
+    public javax.swing.JTextField dReturnCar;
     private javax.swing.JLabel date;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JTextField day;
+    private javax.swing.JButton delete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField status;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JComboBox<String> paymentStat;
+    public javax.swing.JComboBox<String> status;
     private javax.swing.JLabel time;
-    private javax.swing.JTextField uCon;
+    private javax.swing.JTextField totalPay;
+    public javax.swing.JTextField transID;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

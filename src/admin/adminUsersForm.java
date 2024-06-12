@@ -286,7 +286,6 @@ public class adminUsersForm extends javax.swing.JFrame {
                     asu.fname.setText(""+rs.getString("u_fname"));
                     asu.lname.setText(""+rs.getString("u_lname"));
                     asu.em.setText(""+rs.getString("u_email"));
-                    asu.contact.setText(""+rs.getString("u_contact"));
                     asu.username.setText(""+rs.getString("u_username"));
                     asu.password.setText(""+rs.getString("u_password"));
                     asu.userType.setSelectedItem(""+rs.getString("u_account"));
@@ -332,7 +331,6 @@ public class adminUsersForm extends javax.swing.JFrame {
                     asu.fname.setText(""+rs.getString("u_fname"));
                     asu.lname.setText(""+rs.getString("u_lname"));
                     asu.em.setText(""+rs.getString("u_email"));
-                    asu.contact.setText(""+rs.getString("u_contact"));
                     asu.username.setText(""+rs.getString("u_username"));
                     asu.password.setText(""+rs.getString("u_password"));
                     asu.userType.setSelectedItem(""+rs.getString("u_account"));
@@ -386,7 +384,7 @@ public class adminUsersForm extends javax.swing.JFrame {
                 TableModel tbl = usersTable.getModel();
                 ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE u_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
                 if(rs.next()){
-                    adminIndividualPrinting aip = new adminIndividualPrinting();
+                    adminIndividualUserPrinting aip = new adminIndividualUserPrinting();
                     aip.userID.setText(""+rs.getInt("u_id"));
                     aip.fname.setText(""+rs.getString("u_fname"));
                     aip.lname.setText(""+rs.getString("u_lname"));
